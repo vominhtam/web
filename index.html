@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>COLOSSEUM</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <style>
+        .container {
+            width: 100%;
+            max-width: 840px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .navbar {
+            margin-bottom: 0px;
+            display: flex;
+            min-height: 60px;
+        }
+        .no-padding {
+            padding: 0px;
+        }
+        .logo {
+            height: 20px;
+        }
+        .navbar-nav {
+            float: right;
+            margin: 0px;
+        }
+        .navbar-brand {
+            padding: 0 0 0 15px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+        }
+        .navbar-header {
+            margin: 0px;
+        }
+        .navbar-toggle {
+            border-color: #0f2eaa;
+            margin-top: 12px;
+        }
+        .navbar-toggle .icon-bar {
+            background-color: #0f2eaa;
+        }
+        .navbar-nav>li>a {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            color: #0f2eaa;
+        }
+        .navbar-active, .nb>li>a:focus, .nb>li>a:hover {
+            background-color: #0f2eaa;
+            font-size: 12px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            text-align: left;
+            color: #ffffff;
+        }
+
+        .navbar-active a {
+            color: #ffffff !important;
+        }
+        .navbar-collapse.in {
+            float: left;
+        }
+        .wrapper {
+            padding-top: 40px;
+        }
+        .nav-tabs {
+            border: 1px solid #f2f2f2;
+            border-radius: 10px;
+        }
+        .nav-tabs>li>a {
+            margin-right: 0;
+        }
+        .nav-tabs.nav-justified>li.active>a, .nav-tabs.nav-justified>li.active>a:hover, .nav-tabs.nav-justified>li>a, .nav-tabs.nav-justified>.active>a:focus {
+            border: none;
+        }
+        .nav-tabs.nav-justified {
+            border-bottom: 1px solid #f2f2f2;
+        }
+        .nav-tabs.nav-justified>li>a {
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            color: #808285;
+            border-radius: 10px;
+            padding-top: 22px;
+            padding-bottom: 22px;
+        }
+        .nav-tabs.nav-justified>li>a:hover, .nav-tabs.nav-justified>li.active>a {
+            color: #ffffff;
+            background-color: #0f2eaa;
+        }
+        .tab-body {
+            margin-top: 45px;
+            display: inline-flex;
+            width: 100%;
+        }
+        .tab-pane {
+            padding-left: 10px;
+        }
+        .tab-body .left {
+            border-left: solid 3px #334db7;
+            padding-left: 40px;
+            font-size: 30px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            color: #000000;
+        }
+        .tab-body .right {
+            margin-bottom: 30px;
+        }
+        .tab-body .right .text {
+            font-size: 17px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            color: #808285;
+        }
+        .tab-body .right .button {
+            width: 310px;
+            padding-top: 25px;
+            padding-bottom: 25px;
+            border: solid 1px #0f2eaa;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            text-align: center;
+            color: #0f2eaa;
+        }
+        .margin-md {
+            margin-top: 90px;
+        }
+        ul.timeline {
+            list-style-type: none;
+            position: relative;
+        }
+        ul.timeline:before {
+            content: ' ';
+            background: #f2f2f2;
+            display: inline-block;
+            position: absolute;
+            left: 29px;
+            width: 2px;
+            height: 100%;
+            z-index: 400;
+        }
+        ul.timeline > li {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        ul.timeline > li:before {
+            content: '•';
+            background: #f9f9f9;
+            display: inline-block;
+            position: absolute;
+            border-radius: 50%;
+            border: solid 1px #f2f2f2;
+            left: 20px;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            font-size: 13px;
+            z-index: 400;
+            color: #1cabff;
+        }
+        .title {
+            font-size: 34px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 0.76;
+        }
+        .timeline .til {
+            font-size: 21px;
+            font-weight: 300;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.24;
+            color: #1cabff;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        .timeline-content {
+            margin-top: 80px;
+        }
+        ul.event {
+            list-style-type: disc !important;
+        }
+        ul.event>li {
+            font-size: 17px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.59;
+            color: #808285;
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background-color: #f2f2f2;
+            border-radius: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .staff-list {
+            margin-top: 60px;
+        }
+        .staff-info {
+            text-align: center;
+            padding-top: 20px;
+            margin-bottom: 30px;
+        }
+        .staff-info .name {
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            color: #000000;
+        }
+        .staff-info .name .bold {
+            font-size: 18px;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            font-weight: bold;
+            color: #000000;
+        }
+        .staff-info .staff-title {
+            margin-top: 10px;
+            font-size: 15px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.73;
+            color: #1cabff;
+        }
+        .staff-info .description {
+            font-size: 12px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 2.17;
+            color: #808285;
+        }
+        .line {
+            opacity: 0.8;
+            border: solid 1px #cccccc;
+        }
+        .footer {
+            padding-top: 50px;
+            padding-bottom: 30px;
+        }
+        .footer .title {
+            font-size: 12px;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.75;
+            text-align: left;
+            color: #2d2b59;
+            font-weight: bold;
+        }
+        .footer .text {
+            font-size: 12px;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.75;
+            text-align: left;
+            color: #2d2b59;
+            font-weight: normal;
+        }
+        .footer .link-list {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .footer .link-list .item {
+            font-size: 10px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 2.1;
+            text-decoration: underline;
+            text-align: left;
+            color: #2d2b59;
+        }
+        .copyright {
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 2.09;
+            letter-spacing: -0.11px;
+            text-align: left;
+            color: #2d2b59;
+            margin-top: 30px;
+        }
+        .padding-md {
+            padding-left: 100px;
+        }
+        .tab-body-mb {
+            display: none;
+        }
+        @media (max-width: 767px){
+            .container {
+                max-width: 80%;
+            }
+            .padding-md {
+             padding-left: 15px;
+            }
+            .navbar-collapse {
+                float: left;
+            }
+            .tab-body {
+                display: none;
+            }
+            .tab-body-mb{
+                display: block;
+            }
+            .tab-body-mb .tab-body-content {
+                margin-top: 45px;
+                width: 100%;
+                border-left: solid 3px #334db7;
+                padding-left: 10px;
+                display: inline-block;
+            }
+            .tab-body-mb .left {
+                font-size: 30px;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                color: #000000;
+            }
+            .tab-body-mb .right {
+                margin-bottom: 30px;
+                margin-top: 10px;
+            }
+            .tab-body-mb .right .text {
+                font-size: 17px;
+                font-weight: normal;
+                font-stretch: normal;
+                font-style: normal;
+                color: #808285;
+            }
+            .tab-body-mb .right .button {
+                width: 310px;
+                padding-top: 25px;
+                padding-bottom: 25px;
+                border: solid 1px #0f2eaa;
+                border-radius: 50px;
+                font-size: 18px;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                text-align: center;
+                color: #0f2eaa;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <nav class="navbar">
+            <div class="container no-padding">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img class="logo" src="logo_demo.png" />
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse no-padding" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav nb">
+                        <li><a href="#">서비스</a></li>
+                        <li><a href="#">요금</a></li>
+                        <li><a href="#">뉴스</a></li>
+                        <li><a href="#">회사소개</a></li>
+                        <li><a href="#">커리어</a></li>
+                        <li class="navbar-active"><a href="#">COLO 시작하기</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div class="row">
+            <img class="img-responsive" src="background.png">
+        </div>
+        <div class="container no-padding wrapper">
+            <ul class="nav nav-tabs nav-justified">
+                <li class="active"><a data-toggle="tab" href="#home">콜로세움</a></li>
+                <li><a data-toggle="tab" href="#menu1">연혁</a></li>
+                <li><a data-toggle="tab" href="#menu2">멤버</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="home" class="tab-pane fade in active">
+                    <div class="tab-body">
+                        <div class="col-xs-12 col-md-4 content left">
+                            미션
+                        </div>
+                        <div class="col-xs-12 col-md-8 content right">
+                            <div class="text">
+                                세상의 모든 재화가 공정하고 효과적으로 거래되도록
+                            </div>
+                            <div class="text">
+                                유익한 서비스를 발굴하고, 기획하고, 연결하며, 발전시키고자 합니다.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-body-mb">
+                        <div class="tab-body-content">
+                            <div class="col-xs-12 col-md-4 content left">
+                                미션
+                            </div>
+                            <div class="col-xs-12 col-md-8 content right">
+                                <div class="text">
+                                    세상의 모든 재화가 공정하고 효과적으로 거래되도록
+                                </div>
+                                <div class="text">
+                                    유익한 서비스를 발굴하고, 기획하고, 연결하며, 발전시키고자 합니다.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-body">
+                        <div class="col-md-4 content left">
+                            비전
+                        </div>
+                        <div class="col-md-8 content right">
+                            <div class="text">
+                                저희는 이커머스 비즈니스 성장을 희망하는 중소형 셀러와 창고주 간의
+                            </div>
+                            <div class="text">
+                                효율적인 소통과 믿음직스러운 물류거래를 이루어 드리는 시스템을 만들어갑니다.
+                            </div>
+                            <div class="text">
+                                콜로세움의 진화된 시스템을 통해 보다 쉽고 간편한 방식으로 한 차원 높은
+                            </div>
+                            <div class="text">
+                                풀필먼트 서비스를 제공해드리고자 합니다.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-body-mb">
+                        <div class="tab-body-content">
+                            <div class="col-md-4 content left">
+                                비전
+                            </div>
+                            <div class="col-md-8 content right">
+                                <div class="text">
+                                    저희는 이커머스 비즈니스 성장을 희망하는 중소형 셀러와 창고주 간의
+                                </div>
+                                <div class="text">
+                                    효율적인 소통과 믿음직스러운 물류거래를 이루어 드리는 시스템을 만들어갑니다.
+                                </div>
+                                <div class="text">
+                                    콜로세움의 진화된 시스템을 통해 보다 쉽고 간편한 방식으로 한 차원 높은
+                                </div>
+                                <div class="text">
+                                    풀필먼트 서비스를 제공해드리고자 합니다.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-body">
+                        <div class="col-md-4 content left">
+                            브랜드스토리
+                        </div>
+                        <div class="col-md-8 content right">
+                            <div class="text">
+                                콜로세움은 로마제국 시대에 세워져 수 세기가 흐른 지금까지도
+                            </div>
+                            <div class="text">
+                                용맹한 검투사의 대결, 영광스러운 승리에 대한 관중의 환호가 가득했던
+                            </div>
+                            <div class="text">
+                                세계적인 건축물로 대표되고 있습니다.
+                            </div>
+                            <br/>
+                            <div class="text">
+                                콜로세움은 로마제국 시대에 세워져 수 세기가 흐른 지금까지도
+                            </div>
+                            <div class="text">
+                                용맹한 검투사의 대결, 영광스러운 승리에 대한 관중의 환호가 가득했던
+                            </div> <div class="text">
+                                세계적인 건축물로 대표되고 있습니다.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-body-mb">
+                        <div class="tab-body-content">
+                            <div class="col-md-4 content left">
+                                브랜드스토리
+                            </div>
+                            <div class="col-md-8 content right">
+                                <div class="text">
+                                    콜로세움은 로마제국 시대에 세워져 수 세기가 흐른 지금까지도
+                                </div>
+                                <div class="text">
+                                    용맹한 검투사의 대결, 영광스러운 승리에 대한 관중의 환호가 가득했던
+                                </div>
+                                <div class="text">
+                                    세계적인 건축물로 대표되고 있습니다.
+                                </div>
+                                <br/>
+                                <div class="text">
+                                    콜로세움은 로마제국 시대에 세워져 수 세기가 흐른 지금까지도
+                                </div>
+                                <div class="text">
+                                    용맹한 검투사의 대결, 영광스러운 승리에 대한 관중의 환호가 가득했던
+                                </div>
+                                <div class="text">
+                                    세계적인 건축물로 대표되고 있습니다.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-body">
+                        <div class="col-md-4 content left">
+                            BI 소개
+
+                        </div>
+                        <div class="col-md-8 content right">
+                            <img class="img-responsive" src="img.png">
+                            <br />
+                            <div class="text">
+                                콜로세움의 브랜드 심볼은 실용성과 건축미를 동시에 자랑하는
+                            </div>
+                            <div class="text">
+                                고대 로마제국 시대의 원형경기장을 형상화하였습니다.
+                            </div>
+                            <br/>
+                            <div class="text">
+                                속도감이 느껴지는 외곽선으로 신속한 물류 서비스의 성격을 나타냈으며
+                            </div>
+                            <div class="text">
+                                라벨의 꺾임은 효율적인 물류 관리 시스템을 표현합니다.
+                            </div>
+                            <br/>
+                            <div class="text">
+                                매끈하고 굵은 곡선으로 만들어진 로고타입은 콜로세움의
+                            </div>
+                            <div class="text">
+                                기하학적 조형미를 나타내며, 안정적인 신뢰감을 상징합니다.
+                            </div>
+                            <br />
+                            <div class="button">
+                                BI 다운로드
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-body-mb">
+                        <div class="tab-body-content">
+                            <div class="col-md-4 content left">
+                                BI 소개
+
+                            </div>
+                            <div class="col-md-8 content right">
+                                <img class="img-responsive" src="img.png">
+                                <br />
+                                <div class="text">
+                                    콜로세움의 브랜드 심볼은 실용성과 건축미를 동시에 자랑하는
+                                </div>
+                                <div class="text">
+                                    고대 로마제국 시대의 원형경기장을 형상화하였습니다.
+                                </div>
+                                <br/>
+                                <div class="text">
+                                    속도감이 느껴지는 외곽선으로 신속한 물류 서비스의 성격을 나타냈으며
+                                </div>
+                                <div class="text">
+                                    라벨의 꺾임은 효율적인 물류 관리 시스템을 표현합니다.
+                                </div>
+                                <br/>
+                                <div class="text">
+                                    매끈하고 굵은 곡선으로 만들어진 로고타입은 콜로세움의
+                                </div>
+                                <div class="text">
+                                    기하학적 조형미를 나타내며, 안정적인 신뢰감을 상징합니다.
+                                </div>
+                                <br />
+                                <div class="button">
+                                    BI 다운로드
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="menu1" class="tab-pane fade">
+
+                </div>
+                <div id="menu2" class="tab-pane fade">
+
+                </div>
+            </div>
+            <ul class="nav nav-tabs nav-justified margin-md">
+                <li class="active"><a data-toggle="tab" href="#timeline1">콜로세움</a></li>
+                <li><a data-toggle="tab" href="#timeline2">연혁</a></li>
+                <li><a data-toggle="tab" href="#timeline3">멤버</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="timeline1" class="tab-pane fade in active">
+                    <div class="row timeline-content">
+                        <div class="col-md-4">
+                            <div class="title">2020</div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <ul class="timeline">
+                                    <li>
+                                       <div class="til">2020.07</div>
+                                        <ul class="event">
+                                            <li>
+                                                벤처기업 인증
+                                            </li>
+                                            <li>소프트웨어 특허 10건 출원</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="til">2020.06</div>
+                                        <ul class="event">
+                                            <li>
+                                                상표권 1종 2류 출원
+                                            </li>
+                                            <li>서울창업허브 신생산업특화센터 보육기업 선정</li>
+                                            <li>인포뱅크 시드 투자</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="til">2020.05</div>
+                                        <ul class="event">
+                                            <li>
+                                                COLO 정규 1차버전 런칭
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="til">2020.04</div>
+                                        <ul class="event">
+                                            <li>
+                                                창고센터 3개소 추가 구축(경기 시화/화성/삼송)
+
+                                            </li>
+                                            <li>중소벤처기업진흥공단 혁신창업사업화자금 지원 선정</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="til">2020.03</div>
+                                        <ul class="event">
+                                            <li>
+                                                누적 매출 5억원 돌파
+
+                                            </li>
+                                            <li>중소벤처기업부 청년창업사관학교 10기 선정</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="til">2020.02</div>
+                                        <ul class="event">
+                                            <li>
+                                                누적 매출 5억원 돌파
+                                            </li>
+                                            <li>중소벤처기업부 청년창업사관학교 10기 선정</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="til">2020.01</div>
+                                        <ul class="event">
+                                            <li>
+                                                패션/의류 전용 창고센터 구축(경기 양주)
+                                            </li>
+                                            <li>
+                                                카카오톡 선물하기 풀필먼트 서비스 11만건 수주
+                                            </li>
+                                            <li>
+                                                아산나눔재단 마루180 2020 입주 스타트업 선정
+                                            </li>
+                                            <li>
+                                                매경미라클랩 시드 투자
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="timeline2" class="tab-pane fade">
+
+                </div>
+                <div id="timeline3" class="tab-pane fade">
+
+                </div>
+            </div>
+            <ul class="nav nav-tabs nav-justified margin-md">
+                <li class="active"><a data-toggle="tab" href="#staff1">콜로세움</a></li>
+                <li><a data-toggle="tab" href="#staff2">연혁</a></li>
+                <li><a data-toggle="tab" href="#staff3">멤버</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="staff1" class="tab-pane fade in active">
+                    <div class="row staff-list">
+                        <div class="col-xs-12 col-md-4">
+                            <div class="avatar"></div>
+                            <div class="staff-info">
+                                <div class="name">
+                                    <span class="bold">박진수</span> · 대표이사
+                                </div>
+                                <div class="staff-title">
+                                    Founder
+                                </div>
+                                <div class="description">
+                                    사업기획/경영 총괄
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <div class="avatar"></div>
+                            <div class="staff-info">
+                                <div class="name">
+                                    <span class="bold">박진수</span> · 대표이사
+                                </div>
+                                <div class="staff-title">
+                                    Founder
+                                </div>
+                                <div class="description">
+                                    사업기획/경영 총괄
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <div class="avatar"></div>
+                            <div class="staff-info">
+                                <div class="name">
+                                    <span class="bold">박진수</span> · 대표이사
+                                </div>
+                                <div class="staff-title">
+                                    Founder
+                                </div>
+                                <div class="description">
+                                    사업기획/경영 총괄
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <div class="avatar"></div>
+                            <div class="staff-info">
+                                <div class="name">
+                                    <span class="bold">박진수</span> · 대표이사
+                                </div>
+                                <div class="staff-title"></div>
+                                <div class="description">
+                                    사업기획/경영 총괄
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <div class="avatar"></div>
+                            <div class="staff-info">
+                                <div class="name">
+                                    <span class="bold">박진수</span> · 대표이사
+                                </div>
+                                <div class="staff-title"></div>
+                                <div class="description">
+                                    사업기획/경영 총괄
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <div class="avatar"></div>
+                            <div class="staff-info">
+                                <div class="name">
+                                    <span class="bold">박진수</span> · 대표이사
+                                </div>
+                                <div class="staff-title"></div>
+                                <div class="description">
+                                    사업기획/경영 총괄
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="staff2" class="tab-pane fade">
+
+                </div>
+                <div id="staff3" class="tab-pane fade">
+
+                </div>
+            </div>
+        </div>
+        <div class="line"></div>
+        <div class="footer">
+            <div class="container">
+                <div class="col-md-4">
+                    <div class="title">
+                        (주) 콜로세움 코퍼레이션
+                    </div>
+                    <div class="text">
+                        사업자등록번호 507-86-01649  |  대표이사 박진수
+                    </div>
+                    <div class="text">
+                        서울시 강남구 역삼로 180, 마루180 4층
+                    </div>
+                    <div class="link-list">
+                        <div class="item">사업자정보 확인</div>
+                        <div class="item">이용약관</div>
+                        <div class="item">개인정보 처리방침</div>
+                    </div>
+                </div>
+                <div class="col-md-8 padding-md">
+                    <div class="title">
+                        고객센터
+                    </div>
+                    <div class="text">
+                        전자우편  |  support@colosseum.kr
+                    </div>
+                    <div class="text">
+                        대표전화  |  1566-9527
+                    </div>
+                </div>
+
+                <div class="col-md-12 copyright">© Copyright 2020 Colosseum Corporation. All rights reserved.</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
